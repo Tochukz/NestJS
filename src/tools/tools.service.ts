@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Tool } from './tool.interface'
+import { Tool } from './interfaces/tool.interface'
 @Injectable()
 export class ToolsService {
     private readonly tools: Tool[] = [];

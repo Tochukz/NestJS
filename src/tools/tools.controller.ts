@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { ToolsService } from './tools.service';
-import { ToolsDto } from './tools.dto';
+import { ToolsDto } from './dto/tools.dto';
 
 @Controller('tools')
 export class ToolsController {
@@ -16,6 +16,6 @@ export class ToolsController {
     add(@Body() toolsDto: ToolsDto) {
         this.toolsService.add(toolsDto);
         return this.toolsService.all();
-        //$ curl localhost:3000/tools -d 'name=Nest&typeNodeJS FrameWork&level=1&experience=10' | python -m json.tool
+        //$ curl localhost:3000/tools -d 'name=Nest&type=NodeJS FrameWork&level=1&experience=10' | python -m json.tool
     }
 }
