@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Post, Body, Query, Put, Delete } from '@nestjs/common';
-import { AddPersonDto } from './add-person.dto';
-import { UpdatePersonDto } from './update-person.dto';
+import { AddPersonDto } from './dto/add-person.dto';
+import { UpdatePersonDto } from './dto/update-person.dto';
 
 @Controller('people')
 export class PeopleController {
