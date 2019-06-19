@@ -5,9 +5,10 @@ import { PeopleController } from './people/people.controller';
 import { CarsController } from './cars/cars.controller';
 import { ToolsController } from './tools/tools.controller';
 import { ToolsService } from './tools/tools.service';
+import { ToolsModule } from './tools/tools.module';
 
 @Module({
-  imports: [],
+  imports: [ToolsModule],
   controllers: [AppController, PeopleController, CarsController, ToolsController],
   providers: [AppService, ToolsService],
 })
