@@ -62,7 +62,7 @@ You can make a module global by annotating it with the `@Global()` decorator.
 __Midlewares__  
 Create a middleware  
 ```
-> nest g middleware common/middlewares/logger
+$ nest g middleware common/middlewares/logger
 ```
 The file `logger.middleware.ts` will be generated in the `src/common/middlewares` directory.
 
@@ -78,3 +78,26 @@ Here we are working with mysql therefore the `mysql2` library was installed. Oth
 
 __Migrations__  
 Migration is managed by `Sequelize CLI` and not `Nest`. Go to [Sequelize documentation](https://sequelize.org/v5/manual/migrations.html#the-cli) to learn more.  
+
+### Authentication
+To implement authentication using passport, the following dependencies are needed:
+* Passport Node module: `passport`
+* Nest module that wraps the  `passport`: `@nestjs/passport`
+* A module for your chosen authentication strategy e.g `passport-local` or `passport-jwt`
+* The type definition for your chosen authentication strategy e.g `@types/passport-local`
+
+Let install dependency for username/password authentication:
+```
+$ npm install --save @nestjs/passport passport passport-local
+$ npm install --save-dev @types/passport-local
+```  
+Here we use the `passport-local` strategy.   
+
+To implement `JWT` functionality, a couple of packages must be installed :
+* `@nestjs/jwt` helps with JWT manipulation  
+* `passport-jwt` is the passport implementation of the JWT strategy  
+* `@types/passport-jwt` provides the TypeScript type definitions.  
+```
+$ npm install @nestjs/jwt passport-jwt
+$ npm install @types/passport-jwt --save-dev
+```
