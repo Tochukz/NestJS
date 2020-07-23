@@ -2,7 +2,7 @@ import { Injectable, PipeTransform, ArgumentMetadata, BadRequestException } from
 import { validate } from "class-validator";
 import { plainToClass } from 'class-transformer';
 
-@Injectable() 
+@Injectable()
 export class ValidationPipe implements PipeTransform {
     async transform(value: any, metaData: ArgumentMetadata) {
         const metatype = metaData.metatype;
@@ -14,12 +14,12 @@ export class ValidationPipe implements PipeTransform {
         const error = await validate(object);
         if (error.length > 0) {
             throw new BadRequestException('Validation failed');
-        } 
+        }
         return value;
     }
 
     private toValidate(metatype: Function): boolean {
-        // If the type is a javascript native type then don't validate becase they cant not have validation decorator attached
+        // If the type is a javascript native type then don't validate because they cant not have validation decorator attached
         const types: Function[] = [String, Boolean, Number, Array, Object];
         return !types.includes(metatype);
     }

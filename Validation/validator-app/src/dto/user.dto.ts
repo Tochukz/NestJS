@@ -4,7 +4,7 @@ export default class UserDto {
     @IsString() 
     username: string;
 
-    @IsEmail()
+    @IsEmail(undefined, {message: 'Email is required'})
     email: string;
 
     @IsNumber()
