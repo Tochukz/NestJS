@@ -53,7 +53,7 @@ $ nest g interface user/interfaces/user
 The will generated a `user.interface` class in the `src/user/interfaces` directory.  
 
 __Modules__  
-Create a generate module   
+To generate a module   
 ```
 $ nest g module admin
 ```  
@@ -99,5 +99,24 @@ To implement `JWT` functionality, a couple of packages must be installed :
 * `@types/passport-jwt` provides the TypeScript type definitions.  
 ```
 $ npm install @nestjs/jwt passport-jwt
-$ npm install @types/passport-jwt --save-dev
+$ npm install @types/passport-jwt --save-dev   
+```  
+
+### Validation and Pipes  
+A pipe is a class annotated with the `@Injectable()` decorator and implements the `PipeTransform` interface.  
+Pipes can be used to transform incoming request data, cast data types and validate data.  
+Pipes run inside the exceptions zones. If an exception is thrown inside a Pipe, no controller method will be called.  
+
+__Object schema validation__  
+To carryout an object validation you can use the _schema-based_ approach. You can create a _Joi-based_ scheme using the _Joi_ library.  
 ```
+$ npm install --save @hapi/joi
+$ npm install --save-dev @types/hapi__joi  
+```
+
+__Class Validator__  
+Instead of using the _schema validation_ technique shown above, use can use _class validation_. First install the `class-validator` and `class-transformer` modules.  
+```
+$ npm i --save class-validator class-transformer
+```
+Learn more about `class-validator` decorators on [Githuh](https://github.com/typestack/class-validator#usage)

@@ -19,7 +19,7 @@ export class ValidationPipe implements PipeTransform {
     }
 
     private toValidate(metatype: Function): boolean {
-        // If the type is a javascript native type then don't validate because they cant not have validation decorator attached
+        // If the type is a javascript native type then don't validate because they cannot have validation decorator attached
         const types: Function[] = [String, Boolean, Number, Array, Object];
         return !types.includes(metatype);
     }
