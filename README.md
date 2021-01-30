@@ -120,3 +120,21 @@ Instead of using the _schema validation_ technique shown above, use can use _cla
 $ npm i --save class-validator class-transformer
 ```
 Learn more about `class-validator` decorators on [Githuh](https://github.com/typestack/class-validator#usage)
+
+
+### Authentication  
+##### Local Authentication
+See [Article at dev.to](https://dev.to/nestjs/authentication-and-sessions-for-mvc-apps-with-nestjs-55a4)  
+__Node modules required__    
+* @nestjs/passport
+* passport  
+* passport/local  
+* express-handlebars or pug
+* express-session  
+* connect-flash  
+
+And for `dev` only purposes we can include the following
+* @types/express  
+* @types/express-session  
+* @types/connect-flash  
+* @types/express-handlebars or @tyes/pug   
