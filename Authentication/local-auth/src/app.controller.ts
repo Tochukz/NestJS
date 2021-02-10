@@ -15,7 +15,7 @@ export class AppController {
 
   @UseGuards(LoginGuard)
   @Post('/login')
-  login(@Response() res): void {
+  login(@Response() res): void {  
     res.redirect('/home')
   }
 

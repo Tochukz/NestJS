@@ -128,7 +128,7 @@ See [Article at dev.to](https://dev.to/nestjs/authentication-and-sessions-for-mv
 __Node modules required__    
 * @nestjs/passport
 * passport  
-* passport/local  
+* passport-local  
 * express-handlebars or pug
 * express-session  
 * connect-flash  
@@ -138,3 +138,8 @@ And for `dev` only purposes we can include the following
 * @types/express-session  
 * @types/connect-flash  
 * @types/express-handlebars or @tyes/pug   
+
+__Local login path__    
+```
+Login Guard -> Local Strategy -> Auth Service -> Controller Action
+```

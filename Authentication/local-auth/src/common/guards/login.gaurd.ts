@@ -3,11 +3,12 @@ import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
 export class LoginGuard extends AuthGuard('local') {
-  async canActivate(context: ExecutionContext) {
+  async canActivate(context: ExecutionContext) {    
+    // This will trigger the validate() method of the LocalStrategy.
     const result  = (await super.canActivate(context)) as boolean;
     const request = context.switchToHttp().getRequest();
     // The logIn() method is added automatically by Passport
-    await super.logIn(request);
+    await super.logIn(request);   
     return result;
   }
 }
