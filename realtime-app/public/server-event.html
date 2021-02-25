@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Server Sent Events</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row mt-2">
+      <div class="col-sm-4">
+        <h3 class="text-center">Chat</h3>
+        <div class="form-group">
+          <label>
+              <strong>Username</strong>
+          </label>
+          <input type="text" class="form-control"  id="nameInput" value="Chucks" />
+        </div>
+        <div class="form-group">
+          <label>
+              <strong>Message</strong>
+         </label>
+          <input type="text" class="form-control" id="msgInput" />
+        </div>
+        <div class="form-group">
+          <input type="button" class="form-control btn btn-secondary" value="Send" id="sendBtn" />
+          <small>Sent using Fetch API</small>
+        </div>        
+      </div>
+      <div class="col-sm-8">
+        <h3 class="text-center">Messages</h3>
+        <div class="card text-white bg-secondary mb-3">
+            <div class="card-header">Server Sent</div>
+            <div class="card-body" id="cardBody">             
+              
+            </div>
+            <div class="card-footer">
+              <small>Powered by Server Sent Events</small>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+$(document).ready(() => {
+  $('#sendBtn').on('click', () => {
+    const name = $('#nameInput').val();
+    const message = $('#msgInput').val();
+    const time = new Date().toISOString();
+    const body = { name, message, time};
+
+    // Send a message by HTTP POST request
+    fetch('/chat', {
+          method: 'post', 
+          body: JSON.stringify(body), 
+          headers: {
+              'Content-Type' : 'application/json'
+            }
+         })
+         .then(res => res.json())
+         .then(result => { 
+            $('#msgInput').val('');
+            console.log('result', result)
+          })
+         .catch(err => console.error(err));
+  });
+
+  // Received message back through Server Side Push
+  const eventSource = new EventSource('/sse/chat-event');
+  eventSource.onmessage = event => {
+    const data = JSON.parse(event.data);
+    if (Object.keys(data).length > 0) {
+      $('#cardBody').append(`
+        <p class="card-text">
+          ${new Date(data.time).toLocaleString()}
+          <em>${data.name}</em>: 
+          ${data.message}
+        </p>
+      `);
+    } else {
+      console.log('empty message', event);
+    }
+  }
+
+});
+</script>
+</body>
+</html>
