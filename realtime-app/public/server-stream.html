@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>   
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Server Sent Events</title>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 mt-2">
+        <h3 class="text-center">Server Sent Events</h3>
+        <ul class="list-group">
+                     
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<script>
+$(document).ready(() => {
+  let index = 1; 
+  const eventSource = new EventSource('/event-stream');
+  eventSource.onmessage = event => {
+      console.log('event', event);
+      const data = JSON.parse(event.data);
+      $('.list-group').append(`
+        <li class="list-group-item">
+          ${data.city}
+          <span class="badge badge-primary badge-pill">${index++}</span>
+        </li>   
+      `);
+  }
+});
+</script>
+</body>
+</html>
