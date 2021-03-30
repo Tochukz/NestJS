@@ -8,8 +8,9 @@ $(document).ready(function() {
         const name = $('#nameInput').val();       
         console.log('sending', message);
         socket.emit('new-message', {name, message}, data => {
-           console.log('message sent!');
+           console.log('message sent!');          
         });
+        $('#msgInput').val('');
       });  
 
       socket.on('server-message', data => {       
@@ -19,8 +20,7 @@ $(document).ready(function() {
            <p class="bg-secondary text-white p-2" style="border-radius: 1em"> 
              <em>${time} ${name}:</em>  ${message}
            </p>
-         `);
-         $('#msgInput').val('');
+         `);        
       })
     }
   });

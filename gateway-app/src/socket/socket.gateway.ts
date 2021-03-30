@@ -7,7 +7,9 @@ export class SocketGateway {
   /*
   @SubscribeMessage('new-message')
   handleMessage(@MessageBody() data: string): string {   
-    data['time'] = new Date().toLocaleString();   
+    data['time'] = new Date().toLocaleString(); 
+    
+    // Send mesage back to the specific client 
     return data;
   }
   */
