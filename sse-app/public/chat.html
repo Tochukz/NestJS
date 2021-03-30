@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">   
-    <script src="/js/jquery-3.2.1.min.js"></script>   
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.4-3-1.min.css">
     <title>Server Sent Events</title>
 </head>
@@ -28,18 +28,18 @@
         <div class="form-group">
           <input type="button" class="form-control btn btn-secondary" value="Send" id="sendBtn" />
           <small>Sent using Fetch API</small>
-        </div>     
+        </div>
         <audio controls id="notify">
           <source src="audio/notify.wav" type="audio/wav" />
-        </audio>  
-        <button id="play" class="btn btn-secondary">Test Sound</button> 
+        </audio>
+        <button id="play" class="btn btn-secondary">Test Sound</button>
       </div>
       <div class="col-sm-8">
         <h3 class="text-center">Messages</h3>
         <div class="card text-white bg-secondary mb-3">
             <div class="card-header">Server Sent</div>
-            <div class="card-body" id="cardBody">             
-              
+            <div class="card-body" id="cardBody">
+
             </div>
             <div class="card-footer">
               <small>Powered by Server Sent Events</small>
@@ -52,7 +52,7 @@
 <script>
 $(document).ready(() => {
   $('#play').on('click', () => {
-    console.log('pay clicked')   
+    console.log('play clicked')   
     document.getElementById('notify').play();
   });
 
@@ -64,14 +64,14 @@ $(document).ready(() => {
 
     // Send a message by HTTP POST request
     fetch('/chat', {
-          method: 'post', 
-          body: JSON.stringify(body), 
+          method: 'post',
+          body: JSON.stringify(body),
           headers: {
               'Content-Type' : 'application/json'
             }
          })
          .then(res => res.json())
-         .then(result => { 
+         .then(result => {
             $('#msgInput').val('');
             console.log('result', result)
           })
@@ -87,7 +87,7 @@ $(document).ready(() => {
       $('#cardBody').append(`
         <p class="card-text">
           ${new Date(data.time).toLocaleString()}
-          <em>${data.name}</em>: 
+          <em>${data.name}</em>:
           ${data.message}
         </p>
       `);
