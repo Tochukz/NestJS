@@ -143,3 +143,9 @@ __Local login path__
 ```
 Login Guard -> Local Strategy -> Auth Service -> Controller Action
 ```
+
+### Testing
+Install the testing package
+```
+$ npm i --save-dev @nestjs/testing
+```
