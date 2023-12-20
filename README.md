@@ -149,3 +149,58 @@ Install the testing package
 ```
 $ npm i --save-dev @nestjs/testing
 ```
+
+### CLI Application
+To build a CLI application using NestJS
+1. Create a new application using Nest CLI
+```
+$ nest new cli-app
+```
+2. Install the _nest-commander_ npm package
+```
+$ npm install nest-commander
+```  
+3. Create a module where you will place you CLI code
+```
+$ npx nest generate module cow-say
+```
+4. Create a command class
+Create a file _src/cow-say/cow-say.command.ts_.
+The file should contain a CowSay class that extends the _CommandRunner_ class and decorated with the _@Command()_ decorator.
+Inside the class you can implement method the supports you CLI command.
+5. Register the _CowSayCommand_ as part of the _CowSayModule_
+```ts
+@Module({
+    providers: [ CowSayCommand ]
+})
+export class CowSayModule {}
+```
+6. Remove REST related code file.
+Since we are implementing a REST application, delete the _app.controller.ts_ and _app.service.ts_ files.
+Update the _app.module.ts_ file to remote references the the deleted files.   
+7. Update the _main.ts_ file to use the _CommandFactory_ instead of the _NestFactory_  
+```ts
+import { CommandFactory } from 'nest-commander';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+  await CommandFactory.run(AppModule);
+}
+bootstrap();
+```
+8. Run CLI app before building.
+To run the CLI app before building it, we need to install _ts-node_ as a dev dependency.
+```
+$ npm install ts-node --save-dev
+```
+After that, you add a script to package.json as follows
+```
+"start:cli": "ts-node src/main.ts"
+```
+Then you can run the script
+```
+$ npm run start:cli
+```
+
+__Learn more__  
+[Creating CLI app with NestJS](https://hackernoon.com/creating-a-cli-app-with-nestjs-a-quick-and-easy-step-by-step-guide)  
